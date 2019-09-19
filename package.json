@@ -1,0 +1,90 @@
+{
+  "name": "galaxycli",
+  "version": "0.11.0",
+  "description": "An open source CLI for darillium users, built with the OCLIF framework",
+  "bin": {
+    "galaxy": "./bin/run"
+  },
+  "dependencies": {
+    "@oclif/command": "^1.5.18",
+    "@oclif/config": "^1.13.3",
+    "@oclif/plugin-autocomplete": "^0.1.3",
+    "@oclif/plugin-help": "^2.2.1",
+    "@oclif/plugin-not-found": "^1.2.3",
+    "@types/inquirer": "^6.5.0",
+    "@types/node-notifier": "^5.4.0",
+    "axios": "^0.19.0",
+    "chalk": "^2.4.2",
+    "cli-ux": "^5.3.1",
+    "inquirer": "^6.5.1",
+    "node-notifier": "^5.4.3",
+    "node-persist": "^3.0.5",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.22.2",
+    "@types/node": "^10.14.16",
+    "globby": "^10.0.1",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3",
+    "aws-sdk": "^2.304.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/Darillium/kitlings",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "galaxy",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-not-found",
+      "@oclif/plugin-autocomplete"
+    ],
+    "s3": {
+      "bucket": "oclif-staging",
+      "templates": {
+        "target": {
+          "unversioned": "tarballs/<%- bin %>/<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-<%- platform %>-<%- arch %><%- ext %>",
+          "versioned": "tarballs/<%- bin %>/<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %><%- ext %>",
+          "manifest": "tarballs/<%- bin %>/<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- platform %>-<%- arch %>"
+        },
+        "vanilla": {
+          "unversioned": "tarballs/<%- bin %>/<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %><%- ext %>",
+          "versioned": "tarballs/<%- bin %>/<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-v<%- version %>/<%- bin %>-v<%- version %><%- ext %>",
+          "manifest": "tarballs/<%- bin %>/<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %>version"
+        }
+      }
+    },
+    "node": {
+      "version": "10.4.0",
+      "targets": [
+        "linux-x64",
+        "win32-x64"
+      ]
+    },
+    "update": {
+      "s3": {}
+    }
+  },
+  "repository": "https://github.com/Darillium/kitlings",
+  "scripts": {
+    "postpack": "rimraf oclif.manifest.json",
+    "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "echo NO TESTS",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "types": "lib/index.d.ts"
+}
