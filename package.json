@@ -28,7 +28,7 @@
     "rimraf": "^3.0.0",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3",
-    "aws-sdk": "^2.304.0"
+    "aws-sdk": "^2.814.0"
   },
   "engines": {
     "node": ">=8.0.0"
